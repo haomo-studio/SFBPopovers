@@ -26,43 +26,48 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-#import "SFBPopoverWindow.h"
-
-// ========================================
-// The class that actually does the work of drawing the popover window
-// ========================================
-@interface SFBPopoverWindowFrame : NSView
+#import "ScoPopover.h"
 
 // ========================================
-// Properties
-// Changing these will NOT mark the view as dirty, to allow for efficient multiple property changes
-@property (nonatomic, assign) SFBPopoverPosition popoverPosition;
-
-@property (nonatomic, assign) CGFloat distance;
-
-@property (nonatomic, copy, nonnull) NSColor * borderColor;
-@property (nonatomic, assign) CGFloat borderWidth;
-@property (nonatomic, assign) CGFloat cornerRadius;
-
-@property (nonatomic, assign) BOOL drawsArrow;
-@property (nonatomic, assign) CGFloat arrowWidth;
-@property (nonatomic, assign) CGFloat arrowHeight;
-@property (nonatomic, assign) BOOL drawRoundCornerBesideArrow;
-
-@property (nonatomic, assign) CGFloat viewMargin;
-@property (nonatomic, copy, nonnull) NSColor * backgroundColor;
-
-@property (nonatomic, assign, getter=isMovable) BOOL movable;
-@property (nonatomic, assign, getter=isResizable) BOOL resizable;
+// NSWindow subclass implementing a popover window
+// ========================================
+@interface ScoPopoverWindow : NSWindow
 
 // ========================================
-// Geometry calculations
-- (NSRect) frameRectForContentRect:(NSRect)contentRect;
-- (NSRect) contentRectForFrameRect:(NSRect)windowFrame;
+// Popover window properties
+- (ScoPopoverPosition) popoverPosition;
+- (void) setPopoverPosition:(ScoPopoverPosition)popoverPosition;
 
-- (NSPoint) attachmentPoint;
-- (NSPoint) attachmentPointForRect:(NSRect)rect;
+- (CGFloat) distance;
+- (void) setDistance:(CGFloat)distance;
+
+- (nonnull NSColor *) borderColor;
+- (void) setBorderColor:(nonnull NSColor *)borderColor;
+- (CGFloat) borderWidth;
+- (void) setBorderWidth:(CGFloat)borderWidth;
+- (CGFloat) cornerRadius;
+- (void) setCornerRadius:(CGFloat)cornerRadius;
+
+- (BOOL) drawsArrow;
+- (void) setDrawsArrow:(BOOL)drawsArrow;
+- (CGFloat) arrowWidth;
+- (void) setArrowWidth:(CGFloat)arrowWidth;
+- (CGFloat) arrowHeight;
+- (void) setArrowHeight:(CGFloat)arrowHeight;
+- (BOOL) drawRoundCornerBesideArrow;
+- (void) setDrawRoundCornerBesideArrow:(BOOL)drawRoundCornerBesideArrow;
+
+- (CGFloat) viewMargin;
+- (void) setViewMargin:(CGFloat)viewMargin;
+- (nonnull NSColor *) popoverBackgroundColor;
+- (void) setPopoverBackgroundColor:(nonnull NSColor *)backgroundColor;
+
+- (BOOL) isMovable;
+- (void) setMovable:(BOOL)movable;
+
+- (BOOL) isResizable;
+- (void) setResizable:(BOOL)resizable;
 
 @end

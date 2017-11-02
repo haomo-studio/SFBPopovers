@@ -27,12 +27,12 @@
  */
 
 #import "ExampleAppDelegate.h"
-#import <SFBPopovers/SFBPopover.h>
+#import <ScoPopovers/ScoPopover.h>
 
 @interface ExampleAppDelegate ()
 {
 @private
-	SFBPopover * _popover;
+	ScoPopover * _popover;
 }
 @end
 
@@ -43,7 +43,7 @@
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
 	[self.parametersWindow center];
 
-	_popover = [[SFBPopover alloc] initWithContentView:self.popoverView];
+	_popover = [[ScoPopover alloc] initWithContentView:self.popoverView];
 
 	// Set up the popover window the match the UI
 	[self changePosition:self.positionPopup];
@@ -71,7 +71,7 @@
 		position = [_popover bestPositionInWindow:[self.toggleButton window] atPoint:where];
 	}
 
-	[_popover setPosition:(SFBPopoverPosition)position];
+	[_popover setPosition:(ScoPopoverPosition)position];
 }
 
 - (IBAction) changeBorderColor:(id)sender

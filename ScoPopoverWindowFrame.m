@@ -26,21 +26,21 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "SFBPopoverWindowFrame.h"
-#import "SFBPopoverWindow.h"
+#import "ScoPopoverWindowFrame.h"
+#import "ScoPopoverWindow.h"
 
-@interface SFBPopoverWindowFrame (Private)
+@interface ScoPopoverWindowFrame (Private)
 - (NSBezierPath *) popoverFramePathForContentRect:(NSRect)rect;
 - (void) appendArrowToPath:(NSBezierPath *)path;
 @end
 
-@implementation SFBPopoverWindowFrame
+@implementation ScoPopoverWindowFrame
 
 - (id) initWithFrame:(NSRect)frame
 {
 	if((self = [super initWithFrame:frame])) {
 		// Set the default appearance
-		self.popoverPosition = SFBPopoverPositionBottom;
+		self.popoverPosition = ScoPopoverPositionBottom;
 
 		self.distance = 0;
 
@@ -69,29 +69,29 @@
 
 	CGFloat offset = self.arrowHeight + self.distance;
 	switch(self.popoverPosition) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
 			frameRect.size.width += offset;
 			break;
 
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			frameRect.size.width += offset;
 			frameRect.origin.x -= offset;
 			break;
 			
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
 			frameRect.size.height += offset;
 			frameRect.origin.y += offset;
 			break;
 
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			frameRect.size.height += offset;
 			break;
 	}
@@ -105,29 +105,29 @@
 
 	CGFloat offset = self.arrowHeight + self.distance;
 	switch(self.popoverPosition) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
 			contentRect.size.width -= offset;
 			break;
 
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			contentRect.size.width -= offset;
 			contentRect.origin.x += offset;
 			break;
 			
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
 			contentRect.size.height -= offset;
 			contentRect.origin.y += offset;
 			break;
 
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			contentRect.size.height -= offset;
 			break;
 	}
@@ -157,51 +157,51 @@
 		arrowDistance += self.cornerRadius;
 
 	switch(self.popoverPosition) {
-		case SFBPopoverPositionLeft:
+		case ScoPopoverPositionLeft:
 			arrowheadPosition = NSMakePoint(maxX, midY);
 			break;
 
-		case SFBPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftTop:
 			arrowheadPosition = NSMakePoint(maxX, minY + arrowDistance);
 			break;
 
-		case SFBPopoverPositionLeftBottom:
+		case ScoPopoverPositionLeftBottom:
 			arrowheadPosition = NSMakePoint(maxX, maxY - arrowDistance);
 			break;
 
-		case SFBPopoverPositionRight:
+		case ScoPopoverPositionRight:
 			arrowheadPosition = NSMakePoint(minX, midY);
 			break;
 
-		case SFBPopoverPositionRightTop:
+		case ScoPopoverPositionRightTop:
 			arrowheadPosition = NSMakePoint(minX, minY + arrowDistance);
 			break;
 
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionRightBottom:
 			arrowheadPosition = NSMakePoint(minX, maxY - arrowDistance);
 			break;
 			
-		case SFBPopoverPositionTop:
+		case ScoPopoverPositionTop:
 			arrowheadPosition = NSMakePoint(midX, minY);
 			break;
 
-		case SFBPopoverPositionTopLeft:
+		case ScoPopoverPositionTopLeft:
 			arrowheadPosition = NSMakePoint(maxX - arrowDistance, minY);
 			break;
 
-		case SFBPopoverPositionTopRight:
+		case ScoPopoverPositionTopRight:
 			arrowheadPosition = NSMakePoint(minX + arrowDistance, minY);
 			break;
 
-		case SFBPopoverPositionBottom:
+		case ScoPopoverPositionBottom:
 			arrowheadPosition = NSMakePoint(midX, maxY);
 			break;
 
-		case SFBPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomLeft:
 			arrowheadPosition = NSMakePoint(maxX - arrowDistance, maxY);
 			break;
 
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionBottomRight:
 			arrowheadPosition = NSMakePoint(minX + arrowDistance, maxY);
 			break;
 	}
@@ -286,7 +286,7 @@
 
 @end
 
-@implementation SFBPopoverWindowFrame (Private)
+@implementation ScoPopoverWindowFrame (Private)
 
 - (NSBezierPath *) popoverFramePathForContentRect:(NSRect)contentRect
 {
@@ -305,12 +305,12 @@
 	[path setLineJoinStyle:NSRoundLineJoinStyle];
 
 	NSPoint currentPoint = NSMakePoint(minX, maxY);
-	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionBottomRight != self.popoverPosition && SFBPopoverPositionRightBottom != self.popoverPosition)))
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (ScoPopoverPositionBottomRight != self.popoverPosition && ScoPopoverPositionRightBottom != self.popoverPosition)))
 		currentPoint.x += self.cornerRadius;
 
 	NSPoint endOfLine = NSMakePoint(maxX, maxY);
 	BOOL shouldDrawNextCorner = NO;
-	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionBottomLeft != self.popoverPosition && SFBPopoverPositionLeftBottom != self.popoverPosition))) {
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (ScoPopoverPositionBottomLeft != self.popoverPosition && ScoPopoverPositionLeftBottom != self.popoverPosition))) {
 		endOfLine.x -= self.cornerRadius;
 		shouldDrawNextCorner = YES;
 	}
@@ -318,13 +318,13 @@
 	[path moveToPoint:currentPoint];
 
 	// If arrow should be drawn at top-left point, draw it.
-	if(SFBPopoverPositionBottomRight == self.popoverPosition)
+	if(ScoPopoverPositionBottomRight == self.popoverPosition)
 		[self appendArrowToPath:path];
-	else if(SFBPopoverPositionBottom == self.popoverPosition) {
+	else if(ScoPopoverPositionBottom == self.popoverPosition) {
 		[path lineToPoint:NSMakePoint(midX - (self.arrowWidth / 2), maxY)];
 		[self appendArrowToPath:path];
 	}
-	else if(SFBPopoverPositionBottomLeft == self.popoverPosition) {
+	else if(ScoPopoverPositionBottomLeft == self.popoverPosition) {
 		[path lineToPoint:NSMakePoint(endOfLine.x - self.arrowWidth, maxY)];
 		[self appendArrowToPath:path];
 	}
@@ -341,19 +341,19 @@
 	// Draw the right side, beginning at the top-right.
 	endOfLine = NSMakePoint(maxX, minY);
 	shouldDrawNextCorner = NO;
-	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionTopLeft != self.popoverPosition && SFBPopoverPositionLeftTop != self.popoverPosition))) {
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (ScoPopoverPositionTopLeft != self.popoverPosition && ScoPopoverPositionLeftTop != self.popoverPosition))) {
 		endOfLine.y += self.cornerRadius;
 		shouldDrawNextCorner = YES;
 	}
 
 	// If arrow should be drawn at right-top point, draw it.
-	if(SFBPopoverPositionLeftBottom == self.popoverPosition)
+	if(ScoPopoverPositionLeftBottom == self.popoverPosition)
 		[self appendArrowToPath:path];
-	else if(SFBPopoverPositionLeft == self.popoverPosition) {
+	else if(ScoPopoverPositionLeft == self.popoverPosition) {
 		[path lineToPoint:NSMakePoint(maxX, midY + (self.arrowWidth / 2))];
 		[self appendArrowToPath:path];
 	}
-	else if(SFBPopoverPositionLeftTop == self.popoverPosition) {
+	else if(ScoPopoverPositionLeftTop == self.popoverPosition) {
 		[path lineToPoint:NSMakePoint(maxX, endOfLine.y + self.arrowWidth)];
 		[self appendArrowToPath:path];
 	}
@@ -370,19 +370,19 @@
 	// Draw the bottom side, beginning at the bottom-right.
 	endOfLine = NSMakePoint(minX, minY);
 	shouldDrawNextCorner = NO;
-	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionTopRight != self.popoverPosition && SFBPopoverPositionRightTop != self.popoverPosition))) {
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (ScoPopoverPositionTopRight != self.popoverPosition && ScoPopoverPositionRightTop != self.popoverPosition))) {
 		endOfLine.x += self.cornerRadius;
 		shouldDrawNextCorner = YES;
 	}
 
 	// If arrow should be drawn at bottom-right point, draw it.
-	if(SFBPopoverPositionTopLeft == self.popoverPosition)
+	if(ScoPopoverPositionTopLeft == self.popoverPosition)
 		[self appendArrowToPath:path];
-	else if(SFBPopoverPositionTop == self.popoverPosition) {
+	else if(ScoPopoverPositionTop == self.popoverPosition) {
 		[path lineToPoint:NSMakePoint(midX + (self.arrowWidth / 2), minY)];
 		[self appendArrowToPath:path];
 	}
-	else if(SFBPopoverPositionTopRight == self.popoverPosition) {
+	else if(ScoPopoverPositionTopRight == self.popoverPosition) {
 		[path lineToPoint:NSMakePoint(endOfLine.x + self.arrowWidth, minY)];
 		[self appendArrowToPath:path];
 	}
@@ -399,19 +399,19 @@
 	// Draw the left side, beginning at the bottom-left.
 	endOfLine = NSMakePoint(minX, maxY);
 	shouldDrawNextCorner = NO;
-	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionRightBottom != self.popoverPosition && SFBPopoverPositionBottomRight != self.popoverPosition))) {
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (ScoPopoverPositionRightBottom != self.popoverPosition && ScoPopoverPositionBottomRight != self.popoverPosition))) {
 		endOfLine.y -= self.cornerRadius;
 		shouldDrawNextCorner = YES;
 	}
 
 	// If arrow should be drawn at left-bottom point, draw it.
-	if(SFBPopoverPositionRightTop == self.popoverPosition)
+	if(ScoPopoverPositionRightTop == self.popoverPosition)
 		[self appendArrowToPath:path];
-	else if(SFBPopoverPositionRight == self.popoverPosition) {
+	else if(ScoPopoverPositionRight == self.popoverPosition) {
 		[path lineToPoint:NSMakePoint(minX, midY - (self.arrowWidth / 2))];
 		[self appendArrowToPath:path];
 	}
-	else if(SFBPopoverPositionRightBottom == self.popoverPosition) {
+	else if(ScoPopoverPositionRightBottom == self.popoverPosition) {
 		[path lineToPoint:NSMakePoint(minX, endOfLine.y - self.arrowWidth)];
 		[self appendArrowToPath:path];
 	}
@@ -440,36 +440,36 @@
 	NSPoint endPoint = currentPoint;
 
 	switch(self.popoverPosition) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
 			// Arrow points towards right. We're starting from the top.
 			tipPoint.x += self.arrowHeight;
 			tipPoint.y -= self.arrowWidth / 2;
 			endPoint.y -= self.arrowWidth;
 			break;
 
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			// Arrow points towards left. We're starting from the bottom.
 			tipPoint.x -= self.arrowHeight;
 			tipPoint.y += self.arrowWidth / 2;
 			endPoint.y += self.arrowWidth;
 			break;
 
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
 			// Arrow points towards bottom. We're starting from the right.
 			tipPoint.y -= self.arrowHeight;
 			tipPoint.x -= self.arrowWidth / 2;
 			endPoint.x -= self.arrowWidth;
 			break;
 
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			// Arrow points towards top. We're starting from the left.
 			tipPoint.y += self.arrowHeight;
 			tipPoint.x += self.arrowWidth / 2;

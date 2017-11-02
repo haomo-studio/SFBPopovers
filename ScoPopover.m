@@ -26,26 +26,26 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "SFBPopover.h"
-#import "SFBPopoverWindow.h"
-#import "SFBPopoverWindowFrame.h"
+#import "ScoPopover.h"
+#import "ScoPopoverWindow.h"
+#import "ScoPopoverWindowFrame.h"
 
 #include <QuartzCore/QuartzCore.h>
 
 // A custom delegate class is used since CAAnimation retains its delegate
-@interface SFBPopoverAnimationDelegate : NSObject
+@interface ScoPopoverAnimationDelegate : NSObject
 {
 @private
-	__weak SFBPopoverWindow *_popoverWindow;
+	__weak ScoPopoverWindow *_popoverWindow;
 }
 
-- (instancetype) initWithPopoverWindow:(SFBPopoverWindow *)popoverWindow;
+- (instancetype) initWithPopoverWindow:(ScoPopoverWindow *)popoverWindow;
 
 @end
 
-@implementation SFBPopoverAnimationDelegate
+@implementation ScoPopoverAnimationDelegate
 
-- (instancetype) initWithPopoverWindow:(SFBPopoverWindow *)popoverWindow
+- (instancetype) initWithPopoverWindow:(ScoPopoverWindow *)popoverWindow
 {
 	if((self = [super init])) {
 		_popoverWindow = popoverWindow;
@@ -67,19 +67,19 @@
 
 @end
 
-@interface SFBPopover ()
+@interface ScoPopover ()
 {
 @private
 	NSViewController * _contentViewController;
-	SFBPopoverWindow * _popoverWindow;
+	ScoPopoverWindow * _popoverWindow;
 }
 @end
 
-@interface SFBPopoverWindow (Private)
-- (SFBPopoverWindowFrame *) popoverWindowFrame;
+@interface ScoPopoverWindow (Private)
+- (ScoPopoverWindowFrame *) popoverWindowFrame;
 @end
 
-@implementation SFBPopover
+@implementation ScoPopover
 
 - (id) initWithContentView:(NSView *)contentView
 {
@@ -95,12 +95,12 @@
 		self.animates = YES;
 
 		NSView *contentView = [_contentViewController view];
-		_popoverWindow = [[SFBPopoverWindow alloc] initWithContentRect:[contentView frame] styleMask:0 backing:NSBackingStoreBuffered defer:YES];
+		_popoverWindow = [[ScoPopoverWindow alloc] initWithContentRect:[contentView frame] styleMask:0 backing:NSBackingStoreBuffered defer:YES];
 		[_popoverWindow setContentView:contentView];
 		[_popoverWindow setMinSize:[contentView frame].size];
 
 		CAAnimation *animation = [CABasicAnimation animation];
-		[animation setDelegate:[[SFBPopoverAnimationDelegate alloc] initWithPopoverWindow:_popoverWindow]];
+		[animation setDelegate:[[ScoPopoverAnimationDelegate alloc] initWithPopoverWindow:_popoverWindow]];
 		[_popoverWindow setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:_popoverWindow];
@@ -114,7 +114,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (SFBPopoverPosition) bestPositionInWindow:(NSWindow *)window atPoint:(NSPoint)point
+- (ScoPopoverPosition) bestPositionInWindow:(NSWindow *)window atPoint:(NSPoint)point
 {
 	// Get all relevant geometry in screen coordinates.
 	NSRect screenFrame = NSZeroRect;
@@ -130,13 +130,13 @@
 		pointOnScreen = rectOnScreen.origin;
 	}
 
-	SFBPopoverWindow *popoverWindow = _popoverWindow;
+	ScoPopoverWindow *popoverWindow = _popoverWindow;
 	NSSize popoverSize = [popoverWindow frame].size;
 	popoverSize.width += 2 * [popoverWindow viewMargin];
 	popoverSize.height += 2 * [popoverWindow viewMargin];
 
 	// By default, position us centered below.
-	SFBPopoverPosition side = SFBPopoverPositionBottom;
+	ScoPopoverPosition side = ScoPopoverPositionBottom;
 	CGFloat distance = [popoverWindow arrowHeight] + [popoverWindow distance];
 
 	// We'd like to display directly below the specified point, since this gives a 
@@ -148,13 +148,13 @@
 			if(pointOnScreen.x - popoverSize.width - distance < NSMinX(screenFrame)) {
 				// We'd go off the left of the screen. Try the top.
 				if (pointOnScreen.y + popoverSize.height + distance < NSMaxY(screenFrame))
-					side = SFBPopoverPositionTop;
+					side = ScoPopoverPositionTop;
 			}
 			else
-				side = SFBPopoverPositionLeft;
+				side = ScoPopoverPositionLeft;
 		}
 		else
-			side = SFBPopoverPositionRight;
+			side = ScoPopoverPositionRight;
 	}
 
 	CGFloat halfWidth = popoverSize.width / 2;
@@ -167,52 +167,52 @@
 	// Try to avoid going outwith the parent area in the secondary dimension,
 	// by checking to see if an appropriate corner side would be better.
 	switch(side) {
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionTop:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionTop:
 			// Check to see if we go beyond the left edge of the parent area.
 			if(pointOnScreen.x - halfWidth < NSMinX(parentFrame)) {
 				// We go beyond the left edge. Try using right position.
 				if(pointOnScreen.x + popoverSize.width - arrowInset < NSMaxX(screenFrame)) {
 					// We'd still be on-screen using right, so use it.
-					if(SFBPopoverPositionBottom == side)
-						side = SFBPopoverPositionBottomRight;
+					if(ScoPopoverPositionBottom == side)
+						side = ScoPopoverPositionBottomRight;
 					else
-						side = SFBPopoverPositionTopRight;
+						side = ScoPopoverPositionTopRight;
 				}
 			}
 			else if(pointOnScreen.x + halfWidth >= NSMaxX(parentFrame)) {
 				// We go beyond the right edge. Try using left position.
 				if(pointOnScreen.x - popoverSize.width + arrowInset >= NSMinX(screenFrame)) {
 					// We'd still be on-screen using left, so use it.
-					if(SFBPopoverPositionBottom == side)
-						side = SFBPopoverPositionBottomLeft;
+					if(ScoPopoverPositionBottom == side)
+						side = ScoPopoverPositionBottomLeft;
 					else
-						side = SFBPopoverPositionTopLeft;
+						side = ScoPopoverPositionTopLeft;
 				}
 			}
 			break;
 
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionLeft:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionLeft:
 			// Check to see if we go beyond the bottom edge of the parent area.
 			if(pointOnScreen.y - halfHeight < NSMinY(parentFrame)) {
 				// We go beyond the bottom edge. Try using top position.
 				if(pointOnScreen.y + popoverSize.height - arrowInset < NSMaxY(screenFrame)) {
 					// We'd still be on-screen using top, so use it.
-					if(SFBPopoverPositionRight == side)
-						side = SFBPopoverPositionRightTop;
+					if(ScoPopoverPositionRight == side)
+						side = ScoPopoverPositionRightTop;
 					else
-						side = SFBPopoverPositionLeftTop;
+						side = ScoPopoverPositionLeftTop;
 				}
 			}
 			else if(pointOnScreen.y + halfHeight >= NSMaxY(parentFrame)) {
 				// We go beyond the top edge. Try using bottom position.
 				if(pointOnScreen.y - popoverSize.height + arrowInset >= NSMinY(screenFrame)) {
 					// We'd still be on-screen using bottom, so use it.
-					if(SFBPopoverPositionRight == side)
-						side = SFBPopoverPositionRightBottom;
+					if(ScoPopoverPositionRight == side)
+						side = ScoPopoverPositionRightBottom;
 					else
-						side = SFBPopoverPositionLeftBottom;
+						side = ScoPopoverPositionLeftBottom;
 				}
 			}
 			break;
@@ -308,12 +308,12 @@
 	return [_popoverWindow isVisible];
 }
 
-- (SFBPopoverPosition) position
+- (ScoPopoverPosition) position
 {
 	return [_popoverWindow popoverPosition];
 }
 
-- (void) setPosition:(SFBPopoverPosition)position
+- (void) setPosition:(ScoPopoverPosition)position
 {
 	[_popoverWindow setPopoverPosition:position];
 }
@@ -440,7 +440,7 @@
 
 @end
 
-@implementation SFBPopover (NSWindowDelegateMethods)
+@implementation ScoPopover (NSWindowDelegateMethods)
 
 - (void) windowDidResignKey:(NSNotification *)notification
 {

@@ -31,25 +31,25 @@
 // ========================================
 // Positioning constants
 // ========================================
-typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
-	SFBPopoverPositionLeft          = NSMinXEdge,
-	SFBPopoverPositionRight         = NSMaxXEdge,
-	SFBPopoverPositionTop           = NSMaxYEdge,
-	SFBPopoverPositionBottom        = NSMinYEdge,
-	SFBPopoverPositionLeftTop       = 4,
-	SFBPopoverPositionLeftBottom    = 5,
-	SFBPopoverPositionRightTop      = 6,
-	SFBPopoverPositionRightBottom   = 7,
-	SFBPopoverPositionTopLeft       = 8,
-	SFBPopoverPositionTopRight      = 9,
-	SFBPopoverPositionBottomLeft    = 10,
-	SFBPopoverPositionBottomRight   = 11
+typedef NS_ENUM(NSUInteger, ScoPopoverPosition) {
+	ScoPopoverPositionLeft          = NSMinXEdge,
+	ScoPopoverPositionRight         = NSMaxXEdge,
+	ScoPopoverPositionTop           = NSMaxYEdge,
+	ScoPopoverPositionBottom        = NSMinYEdge,
+	ScoPopoverPositionLeftTop       = 4,
+	ScoPopoverPositionLeftBottom    = 5,
+	ScoPopoverPositionRightTop      = 6,
+	ScoPopoverPositionRightBottom   = 7,
+	ScoPopoverPositionTopLeft       = 8,
+	ScoPopoverPositionTopRight      = 9,
+	ScoPopoverPositionBottomLeft    = 10,
+	ScoPopoverPositionBottomRight   = 11
 };
 
 // ========================================
 // A class that controls display of a popover
 // ========================================
-@interface SFBPopover : NSResponder
+@interface ScoPopover : NSResponder
 
 // ========================================
 // Properties
@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 
 // ========================================
 // Geometry determination
-- (SFBPopoverPosition) bestPositionInWindow:(nonnull NSWindow *)window atPoint:(NSPoint)point;
+- (ScoPopoverPosition) bestPositionInWindow:(nonnull NSWindow *)window atPoint:(NSPoint)point;
 
 // ========================================
 // Show the popover- prefer these to showWindow:
@@ -91,8 +91,8 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 // Popover window properties
 
 // The popover's position relative to its attachment point
-- (SFBPopoverPosition) position;
-- (void) setPosition:(SFBPopoverPosition)position;
+- (ScoPopoverPosition) position;
+- (void) setPosition:(ScoPopoverPosition)position;
 
 // The distance between the attachment point and the popover window
 - (CGFloat) distance;

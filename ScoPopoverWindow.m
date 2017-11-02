@@ -26,21 +26,21 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "SFBPopoverWindow.h"
-#import "SFBPopoverWindowFrame.h"
+#import "ScoPopoverWindow.h"
+#import "ScoPopoverWindowFrame.h"
 
-@interface SFBPopoverWindow ()
+@interface ScoPopoverWindow ()
 {
 @private
 	NSView * _popoverContentView;
 }
 @end
 
-@interface SFBPopoverWindow (Private)
-- (SFBPopoverWindowFrame *) popoverWindowFrame;
+@interface ScoPopoverWindow (Private)
+- (ScoPopoverWindowFrame *) popoverWindowFrame;
 @end
 
-@implementation SFBPopoverWindow
+@implementation ScoPopoverWindow
 
 - (id) initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation
 {
@@ -87,9 +87,9 @@
 	if([_popoverContentView isEqualTo:view])
 		return;
 
-	SFBPopoverWindowFrame *popoverWindowFrame = [self popoverWindowFrame];
+	ScoPopoverWindowFrame *popoverWindowFrame = [self popoverWindowFrame];
 	if(nil == popoverWindowFrame) {
-		popoverWindowFrame = [[SFBPopoverWindowFrame alloc] initWithFrame:NSZeroRect];
+		popoverWindowFrame = [[ScoPopoverWindowFrame alloc] initWithFrame:NSZeroRect];
 		[super setContentView:popoverWindowFrame];
 	}
 
@@ -119,12 +119,12 @@
 	[self setFrame:frameRect display:NO];
 }
 
-- (SFBPopoverPosition) popoverPosition
+- (ScoPopoverPosition) popoverPosition
 {
 	return [[self popoverWindowFrame] popoverPosition];
 }
 
-- (void) setPopoverPosition:(SFBPopoverPosition)popoverPosition
+- (void) setPopoverPosition:(ScoPopoverPosition)popoverPosition
 {
 	if(popoverPosition == [self popoverPosition])
 		return;
@@ -135,21 +135,21 @@
 
 	CGFloat offset = [[self popoverWindowFrame] arrowHeight] + [[self popoverWindowFrame] distance];
 	switch([[self popoverWindowFrame] popoverPosition]) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			frameRect.size.width -= offset;
 			break;
 
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			frameRect.size.height -= offset;
 			break;
 	}
@@ -157,21 +157,21 @@
 	[[self popoverWindowFrame] setPopoverPosition:popoverPosition];
 
 	switch([[self popoverWindowFrame] popoverPosition]) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			frameRect.size.width += offset;
 			break;
 
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			frameRect.size.height += offset;
 			break;
 	}
@@ -226,30 +226,30 @@
 	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
 
 	switch([[self popoverWindowFrame] popoverPosition]) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
 			frameRect.origin.x -= delta;
 			frameRect.size.width += delta;
 			break;
 
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			frameRect.size.width += delta;
 			contentRect.origin.x += delta;
 			break;
 
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
 			frameRect.size.height += delta;
 			contentRect.origin.y += delta;
 			break;
 
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			frameRect.origin.y -= delta;
 			frameRect.size.height += delta;
 			break;
@@ -285,27 +285,27 @@
 	NSRect frameRect = NSInsetRect([self frame], -delta, -delta);
 
 	switch([[self popoverWindowFrame] popoverPosition]) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
 			frameRect = NSOffsetRect(frameRect, -delta, 0);
 			break;
 
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			frameRect = NSOffsetRect(frameRect, delta, 0);
 			break;
 
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
 			frameRect = NSOffsetRect(frameRect, 0, delta);
 			break;
 
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			frameRect = NSOffsetRect(frameRect, 0, -delta);
 			break;
 	}
@@ -370,30 +370,30 @@
 	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
 
 	switch([[self popoverWindowFrame] popoverPosition]) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
 			frameRect.origin.x -= delta;
 			frameRect.size.width += delta;
 			break;
 
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			frameRect.size.width += delta;
 			contentRect.origin.x += delta;
 			break;
 
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
 			frameRect.size.height += delta;
 			contentRect.origin.y += delta;
 			break;
 
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			frameRect.origin.y -= delta;
 			frameRect.size.height += delta;
 			break;
@@ -429,27 +429,27 @@
 	NSRect frameRect = NSInsetRect([self frame], -delta, -delta);
 
 	switch([[self popoverWindowFrame] popoverPosition]) {
-		case SFBPopoverPositionLeft:
-		case SFBPopoverPositionLeftTop:
-		case SFBPopoverPositionLeftBottom:
+		case ScoPopoverPositionLeft:
+		case ScoPopoverPositionLeftTop:
+		case ScoPopoverPositionLeftBottom:
 			frameRect = NSOffsetRect(frameRect, -delta, 0);
 			break;
 
-		case SFBPopoverPositionRight:
-		case SFBPopoverPositionRightTop:
-		case SFBPopoverPositionRightBottom:
+		case ScoPopoverPositionRight:
+		case ScoPopoverPositionRightTop:
+		case ScoPopoverPositionRightBottom:
 			frameRect = NSOffsetRect(frameRect, delta, 0);
 			break;
 
-		case SFBPopoverPositionTop:
-		case SFBPopoverPositionTopLeft:
-		case SFBPopoverPositionTopRight:
+		case ScoPopoverPositionTop:
+		case ScoPopoverPositionTopLeft:
+		case ScoPopoverPositionTopRight:
 			frameRect = NSOffsetRect(frameRect, 0, delta);
 			break;
 
-		case SFBPopoverPositionBottom:
-		case SFBPopoverPositionBottomLeft:
-		case SFBPopoverPositionBottomRight:
+		case ScoPopoverPositionBottom:
+		case ScoPopoverPositionBottomLeft:
+		case ScoPopoverPositionBottomRight:
 			frameRect = NSOffsetRect(frameRect, 0, -delta);
 			break;
 	}
@@ -501,12 +501,12 @@
 
 @end
 
-@implementation SFBPopoverWindow (Private)
+@implementation ScoPopoverWindow (Private)
 
-- (SFBPopoverWindowFrame *) popoverWindowFrame
+- (ScoPopoverWindowFrame *) popoverWindowFrame
 {
 	// The window's content view is the popover frame
-	return (SFBPopoverWindowFrame *)[super contentView];
+	return (ScoPopoverWindowFrame *)[super contentView];
 }
 
 @end

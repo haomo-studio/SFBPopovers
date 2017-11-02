@@ -26,48 +26,43 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
-#import "SFBPopover.h"
-
-// ========================================
-// NSWindow subclass implementing a popover window
-// ========================================
-@interface SFBPopoverWindow : NSWindow
+#import "ScoPopoverWindow.h"
 
 // ========================================
-// Popover window properties
-- (SFBPopoverPosition) popoverPosition;
-- (void) setPopoverPosition:(SFBPopoverPosition)popoverPosition;
+// The class that actually does the work of drawing the popover window
+// ========================================
+@interface ScoPopoverWindowFrame : NSView
 
-- (CGFloat) distance;
-- (void) setDistance:(CGFloat)distance;
+// ========================================
+// Properties
+// Changing these will NOT mark the view as dirty, to allow for efficient multiple property changes
+@property (nonatomic, assign) ScoPopoverPosition popoverPosition;
 
-- (nonnull NSColor *) borderColor;
-- (void) setBorderColor:(nonnull NSColor *)borderColor;
-- (CGFloat) borderWidth;
-- (void) setBorderWidth:(CGFloat)borderWidth;
-- (CGFloat) cornerRadius;
-- (void) setCornerRadius:(CGFloat)cornerRadius;
+@property (nonatomic, assign) CGFloat distance;
 
-- (BOOL) drawsArrow;
-- (void) setDrawsArrow:(BOOL)drawsArrow;
-- (CGFloat) arrowWidth;
-- (void) setArrowWidth:(CGFloat)arrowWidth;
-- (CGFloat) arrowHeight;
-- (void) setArrowHeight:(CGFloat)arrowHeight;
-- (BOOL) drawRoundCornerBesideArrow;
-- (void) setDrawRoundCornerBesideArrow:(BOOL)drawRoundCornerBesideArrow;
+@property (nonatomic, copy, nonnull) NSColor * borderColor;
+@property (nonatomic, assign) CGFloat borderWidth;
+@property (nonatomic, assign) CGFloat cornerRadius;
 
-- (CGFloat) viewMargin;
-- (void) setViewMargin:(CGFloat)viewMargin;
-- (nonnull NSColor *) popoverBackgroundColor;
-- (void) setPopoverBackgroundColor:(nonnull NSColor *)backgroundColor;
+@property (nonatomic, assign) BOOL drawsArrow;
+@property (nonatomic, assign) CGFloat arrowWidth;
+@property (nonatomic, assign) CGFloat arrowHeight;
+@property (nonatomic, assign) BOOL drawRoundCornerBesideArrow;
 
-- (BOOL) isMovable;
-- (void) setMovable:(BOOL)movable;
+@property (nonatomic, assign) CGFloat viewMargin;
+@property (nonatomic, copy, nonnull) NSColor * backgroundColor;
 
-- (BOOL) isResizable;
-- (void) setResizable:(BOOL)resizable;
+@property (nonatomic, assign, getter=isMovable) BOOL movable;
+@property (nonatomic, assign, getter=isResizable) BOOL resizable;
+
+// ========================================
+// Geometry calculations
+- (NSRect) frameRectForContentRect:(NSRect)contentRect;
+- (NSRect) contentRectForFrameRect:(NSRect)windowFrame;
+
+- (NSPoint) attachmentPoint;
+- (NSPoint) attachmentPointForRect:(NSRect)rect;
 
 @end
