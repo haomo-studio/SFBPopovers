@@ -58,6 +58,9 @@
 
 		self.movable = NO;
 		self.resizable = NO;
+        
+        NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:[self frame] options:NSTrackingMouseEnteredAndExited | NSTrackingInVisibleRect | NSTrackingActiveAlways owner:self userInfo:nil];
+        [self addTrackingArea:area];
 	}
 
 	return self;
@@ -222,6 +225,30 @@
 	[path setLineWidth:self.borderWidth];
     [self.borderColor set];
     [path stroke];
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent;
+{
+    NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
+//    [[self window] orderFront:nil];
+    [[self window] makeKeyAndOrderFront:nil];
+//    [[self window] setLevel:NSStatusWindowLevel];
+    NSLog(@"sco-log: orderFront ScoPopoverWindow1");
+}
+
+- (void)mouseExited:(NSEvent *)theEvent;
+{
+    NSLog(@"sco-log: mouseExited ScoPopoverWindowFrame");
+}
+
+- (void)menuTrackingDidBegin:(NSNotification *)notification;
+{
+    NSLog(@"sco-log: menuTrackingDidBegin ScoPopoverWindowFrame");
+}
+
+- (void)menuTrackingDidEnd:(NSNotification *)notification;
+{
+    NSLog(@"sco-log: menuTrackingDidBegin ScoPopoverWindowFrame");
 }
 
 - (void) mouseDown:(NSEvent *)event
@@ -479,6 +506,11 @@
 
 	[path lineToPoint:tipPoint];
 	[path lineToPoint:endPoint];
+}
+
+- (BOOL)acceptsFirstMouse:(nullable NSEvent *)event
+{
+    return YES;
 }
 
 @end
