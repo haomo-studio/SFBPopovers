@@ -239,6 +239,9 @@
 - (void)mouseExited:(NSEvent *)theEvent;
 {
     NSLog(@"sco-log: mouseExited ScoPopoverWindowFrame");
+    NSLog(@"sco-log: orderFront ScoPopoverWindow1222");
+
+    [[[self window] parentWindow] makeKeyAndOrderFront:nil];
 }
 
 - (void)menuTrackingDidBegin:(NSNotification *)notification;
