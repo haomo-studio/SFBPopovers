@@ -231,7 +231,13 @@
 {
     NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
 //    [[self window] orderFront:nil];
-    [[self window] makeKeyAndOrderFront:nil];
+    
+    NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
+    BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
+    if(mouseStatus){
+        NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
+        [[self window] makeKeyWindow:nil];
+    }
 //    [[self window] setLevel:NSStatusWindowLevel];
     NSLog(@"sco-log: orderFront ScoPopoverWindow1");
 }
@@ -240,8 +246,14 @@
 {
     NSLog(@"sco-log: mouseExited ScoPopoverWindowFrame");
     NSLog(@"sco-log: orderFront ScoPopoverWindow1222");
+    
+    NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
+    BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
+    if(mouseStatus){
+        NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
+            [[[self window] parentWindow] makeKeyAndOrderFront:nil];
+    }
 
-    [[[self window] parentWindow] makeKeyAndOrderFront:nil];
 }
 
 - (void)menuTrackingDidBegin:(NSNotification *)notification;
