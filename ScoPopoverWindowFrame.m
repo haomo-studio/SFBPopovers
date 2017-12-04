@@ -235,8 +235,8 @@
     NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
     BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
     if(mouseStatus){
-        NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
-        [[self window] makeKeyWindow:nil];
+        NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrameToMakeKeyWindow");
+        [[self window] makeKeyWindow];;
     }
 //    [[self window] setLevel:NSStatusWindowLevel];
     NSLog(@"sco-log: orderFront ScoPopoverWindow1");
@@ -244,15 +244,11 @@
 
 - (void)mouseExited:(NSEvent *)theEvent;
 {
-    NSLog(@"sco-log: mouseExited ScoPopoverWindowFrame");
-    NSLog(@"sco-log: orderFront ScoPopoverWindow1222");
+    NSLog(@"sco-log: mouseExited ScoPopoverWindowFrameToMakeKeyWindow");
     
     NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
     BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
-    if(mouseStatus){
-        NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
-            [[[self window] parentWindow] makeKeyAndOrderFront:nil];
-    }
+    [[[self window] parentWindow] makeKeyWindow];
 
 }
 
