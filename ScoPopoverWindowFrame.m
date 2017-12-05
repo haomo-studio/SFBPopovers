@@ -59,7 +59,7 @@
 		self.movable = NO;
 		self.resizable = NO;
         
-        NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:[self frame] options:NSTrackingMouseEnteredAndExited |  NSTrackingActiveAlways owner:self userInfo:nil];
+        NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:[self frame] options:NSTrackingMouseEnteredAndExited |  NSTrackingInVisibleRect | NSTrackingActiveAlways owner:self userInfo:nil];
         [self addTrackingArea:area];
 	}
 
@@ -234,6 +234,7 @@
     
     NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
     BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
+    [[[self window] parentWindow] makeKeyWindow];
     if(mouseStatus){
         NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrameToMakeKeyWindow");
         [[self window] makeKeyWindow];;
