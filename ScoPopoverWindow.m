@@ -52,9 +52,32 @@
 		[self setAlphaValue:1];
 		[self setOpaque:NO];
 		[self setHasShadow:YES];
+        
+        screenPickerWindow = [[ScreenPickerWindow alloc] initWithContentRect:NSMakeRect(0, 0, 180, 180) styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
+        screenPickerWindow.delegate = self.delegate;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidBecomeKey:) name:NSWindowDidBecomeKeyNotification object:screenPickerWindow];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:screenPickerWindow];
+        NSLog(@"sco-log: screenPickerWindow initialized");
 	}
 
 	return self;
+}
+
+- (void)windowDidBecomeKey:(NSNotification *)notification {
+    if ([notification object] == screenPickerWindow) {
+        NSLog(@"sco-log: windowDidBecomeKey");
+        [screenPickerWindow setAcceptsMouseMovedEvents:YES];
+        [NSCursor hide];
+    }
+}
+
+- (void)windowDidResignKey:(NSNotification *)notification {
+    if ([notification object] == screenPickerWindow) {
+        NSLog(@"sco-log: windowDidResignKey");
+        [screenPickerWindow setAcceptsMouseMovedEvents:NO];
+        [NSCursor unhide];
+    }
 }
 
 - (NSRect) contentRectForFrameRect:(NSRect)windowFrame
@@ -80,6 +103,11 @@
 - (NSView *) contentView
 {
 	return _popoverContentView;
+}
+
+- (void)keyDown:(NSEvent *)event
+{
+    NSLog(@"sco-log: ScoPopoverWindow keyDown");
 }
 
 - (void) setContentView:(NSView *)view

@@ -29,16 +29,22 @@
 #import <Foundation/Foundation.h>
 
 #import "ScoPopover.h"
+#import "ScreenPickerWindow.h"
 
 // ========================================
 // NSWindow subclass implementing a popover window
 // ========================================
-@interface ScoPopoverWindow : NSWindow
+@interface ScoPopoverWindow : NSWindow {
+    ScreenPickerWindow *screenPickerWindow;
+}
 
 // ========================================
 // Popover window properties
 - (ScoPopoverPosition) popoverPosition;
+
+
 - (void) setPopoverPosition:(ScoPopoverPosition)popoverPosition;
+
 
 - (CGFloat) distance;
 - (void) setDistance:(CGFloat)distance;
@@ -69,5 +75,7 @@
 
 - (BOOL) isResizable;
 - (void) setResizable:(BOOL)resizable;
+
+
 
 @end
