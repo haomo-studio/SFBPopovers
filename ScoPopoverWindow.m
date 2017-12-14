@@ -53,6 +53,7 @@
 		[self setOpaque:NO];
 		[self setHasShadow:YES];
         
+        // @TODO 设置为只能获取到
         screenPickerWindow = [[ScreenPickerWindow alloc] initWithContentRect:NSMakeRect(0, 0, 180, 180) styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
         screenPickerWindow.delegate = self.delegate;
         
