@@ -230,27 +230,34 @@
 - (void)mouseEntered:(NSEvent *)theEvent;
 {
     NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
-//    [[self window] orderFront:nil];
     
-    NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
-    BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
-    [[[self window] parentWindow] makeKeyWindow];
-    if(mouseStatus){
+//    NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
+//    BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
+//    [[[self window] parentWindow] makeKeyWindow];
+    NSLog(@"self.window.parentWindow.isKeyWindow: %i", [[[self window] parentWindow] isKeyWindow]);
+    if([[[self window] parentWindow] isKeyWindow]){
         NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrameToMakeKeyWindow");
         [[self window] makeKeyWindow];;
     }
 //    [[self window] setLevel:NSStatusWindowLevel];
-    NSLog(@"sco-log: orderFront ScoPopoverWindow1");
+    NSLog(@"sco-log: mouseEntered makeKey ScoPopoverWindowFrame");
+}
+
+- (BOOL)isMouseInWindowFrame:(NSEvent *)theEvent
+{
+    NSPoint ml = [NSEvent mouseLocation];
+    return NSMouseInRect(ml, [[self window] frame], false);
 }
 
 - (void)mouseExited:(NSEvent *)theEvent;
 {
     NSLog(@"sco-log: mouseExited ScoPopoverWindowFrameToMakeKeyWindow");
-    
-    NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
-    BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
-//    [[[self window] parentWindow] makeKeyWindow];
-
+//    NSMutableDictionary* threadDict = [[NSThread currentThread] threadDictionary];
+//    BOOL *mouseStatus = [[threadDict valueForKey:@"mouseStatus"] boolValue];
+    NSLog(@"sco-log: mouseExited isMouseInWindowFrame: %i", [self isMouseInWindowFrame: theEvent]);
+    if([[self window] isVisible] && ![self isMouseInWindowFrame: theEvent]){
+        [[[self window] parentWindow] makeKeyWindow];   // 这一行会引起输入法输入框的问题
+    }
 }
 
 - (void)menuTrackingDidBegin:(NSNotification *)notification;
