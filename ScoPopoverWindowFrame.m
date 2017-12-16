@@ -251,6 +251,10 @@
     NSLog(@"sco-log: mouseExited isMouseInWindowFrame: %i", [self isMouseInWindowFrame: theEvent]);
     if([[self window] isVisible] && ![self isMouseInWindowFrame: theEvent]){
         [[[self window] parentWindow] makeKeyWindow];
+        // 解决拖拽的问题。清空NSDragPboard
+        NSPasteboard *dpb = [NSPasteboard pasteboardWithName: NSDragPboard];
+        // @TODO 需要判断当前是在sco面板里进行的拖拽
+        [dpb clearContents];
     }
 }
 
