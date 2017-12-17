@@ -528,6 +528,17 @@
 //		[self setStyleMask:NSBorderlessWindowMask];
 }
 
+- (void)sendEvent:(NSEvent *)event
+{
+    // look for mouse down
+    if ([event type] == NSLeftMouseDown) {
+        NSLog(@"sco-log: ScoWebView hitTest sendEvent");
+        [self makeKeyWindow];
+    }
+    
+    [super sendEvent:event];
+}
+
 @end
 
 @implementation ScoPopoverWindow (Private)

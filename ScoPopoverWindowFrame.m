@@ -227,17 +227,17 @@
     [path stroke];
 }
 
-- (void)mouseEntered:(NSEvent *)theEvent;
-{
-    NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
-
-    NSLog(@"self.window.parentWindow.isKeyWindow: %i", [[[self window] parentWindow] isKeyWindow]);
-    if([[[self window] parentWindow] isKeyWindow]){
-        NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrameToMakeKeyWindow");
-        [[self window] makeKeyWindow];;
-    }
-    NSLog(@"sco-log: mouseEntered makeKey ScoPopoverWindowFrame");
-}
+//- (void)mouseEntered:(NSEvent *)theEvent;
+//{
+//    NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrame");
+//
+//    NSLog(@"self.window.parentWindow.isKeyWindow: %i", [[[self window] parentWindow] isKeyWindow]);
+//    if([[[self window] parentWindow] isKeyWindow]){
+//        NSLog(@"sco-log: mouseEntered ScoPopoverWindowFrameToMakeKeyWindow");
+////        [[self window] makeKeyWindow];
+//    }
+//    NSLog(@"sco-log: mouseEntered makeKey ScoPopoverWindowFrame");
+//}
 
 - (BOOL)isMouseInWindowFrame:(NSEvent *)theEvent
 {
