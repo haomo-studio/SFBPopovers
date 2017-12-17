@@ -21,9 +21,6 @@
 		32CE12DE1367857A00CE7985 /* ScoPopover.h in Headers */ = {isa = PBXBuildFile; fileRef = 32CE12DC1367857A00CE7985 /* ScoPopover.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		32CE12DF1367857A00CE7985 /* ScoPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE12DD1367857A00CE7985 /* ScoPopover.m */; };
 		32CE12E41367859400CE7985 /* ScoPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE12E21367859400CE7985 /* ScoPopoverWindow.m */; };
-		F32F266F1FE705D3005D004A /* ScoWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F32F266E1FE705D3005D004A /* ScoWebView.h */; };
-		F32F26711FE70628005D004A /* ScoWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F32F26701FE70628005D004A /* ScoWebView.m */; };
-		F32F26721FE70628005D004A /* ScoWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F32F26701FE70628005D004A /* ScoWebView.m */; };
 		F32F26741FE707AF005D004A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F32F26731FE707AF005D004A /* WebKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F3B620821FDB6BF600B5B4EA /* ScreenPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F3B6207E1FDB6BF600B5B4EA /* ScreenPickerView.h */; };
 		F3B620831FDB6BF600B5B4EA /* ScreenPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B6207F1FDB6BF600B5B4EA /* ScreenPickerView.m */; };
@@ -64,8 +61,6 @@
 		32CE12DD1367857A00CE7985 /* ScoPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoPopover.m; sourceTree = "<group>"; };
 		32CE12E11367859400CE7985 /* ScoPopoverWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoPopoverWindow.h; sourceTree = "<group>"; };
 		32CE12E21367859400CE7985 /* ScoPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoPopoverWindow.m; sourceTree = "<group>"; };
-		F32F266E1FE705D3005D004A /* ScoWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoWebView.h; sourceTree = "<group>"; };
-		F32F26701FE70628005D004A /* ScoWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoWebView.m; sourceTree = "<group>"; };
 		F32F26731FE707AF005D004A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F3B6207E1FDB6BF600B5B4EA /* ScreenPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenPickerView.h; sourceTree = "<group>"; };
 		F3B6207F1FDB6BF600B5B4EA /* ScreenPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenPickerView.m; sourceTree = "<group>"; };
@@ -164,8 +159,6 @@
 				32CE12E21367859400CE7985 /* ScoPopoverWindow.m */,
 				32A1032C136844AC009FA237 /* ScoPopoverWindowFrame.h */,
 				32A1032D136844AC009FA237 /* ScoPopoverWindowFrame.m */,
-				F32F266E1FE705D3005D004A /* ScoWebView.h */,
-				F32F26701FE70628005D004A /* ScoWebView.m */,
 			);
 			name = ScoPopovers;
 			sourceTree = "<group>";
@@ -187,7 +180,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F32F266F1FE705D3005D004A /* ScoWebView.h in Headers */,
 				32CE12DE1367857A00CE7985 /* ScoPopover.h in Headers */,
 				F3B620821FDB6BF600B5B4EA /* ScreenPickerView.h in Headers */,
 				F3B620841FDB6BF600B5B4EA /* ScreenPickerWindow.h in Headers */,
@@ -286,7 +278,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				32A1041B1368F4D2009FA237 /* ExampleAppDelegate.m in Sources */,
-				F32F26721FE70628005D004A /* ScoWebView.m in Sources */,
 				32A1043C1368F58E009FA237 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,7 +287,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				32CE12DF1367857A00CE7985 /* ScoPopover.m in Sources */,
-				F32F26711FE70628005D004A /* ScoWebView.m in Sources */,
 				32CE12E41367859400CE7985 /* ScoPopoverWindow.m in Sources */,
 				F3B620831FDB6BF600B5B4EA /* ScreenPickerView.m in Sources */,
 				F3B620851FDB6BF600B5B4EA /* ScreenPickerWindow.m in Sources */,
