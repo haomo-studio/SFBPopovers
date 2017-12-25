@@ -77,7 +77,19 @@
     [captureView setImageRef:imageRef];
     [captureView setNeedsDisplay:YES];
     
+    // 设置captureView的color属性
+    captureView.color = [self getColorInCenter];
+    
     [super mouseMoved:event];
+}
+
+- (NSColor *)getColorInCenter {
+    NSBitmapImageRep *bitmapImageRep = [[NSBitmapImageRep alloc] initWithCGImage:imageRef];
+    CGFloat centerX = bitmapImageRep.size.width / 2;
+    CGFloat centerY = bitmapImageRep.size.height / 2;
+    NSColor *color = [bitmapImageRep colorAtX:centerX y:centerY];
+    
+    return color;
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
@@ -106,10 +118,7 @@
         [self orderOut:self];
         
         if ([_delegate respondsToSelector:@selector(window:clickedAtPoint:withColor:)]) {
-            NSBitmapImageRep *bitmapImageRep = [[NSBitmapImageRep alloc] initWithCGImage:imageRef];
-            CGFloat centerX = bitmapImageRep.size.width / 2;
-            CGFloat centerY = bitmapImageRep.size.height / 2;            
-            NSColor *color = [bitmapImageRep colorAtX:centerX y:centerY];
+            NSColor *color = [self getColorInCenter];
             
             [_delegate window:self clickedAtPoint:p withColor:color];
         }

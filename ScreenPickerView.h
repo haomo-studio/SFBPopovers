@@ -8,5 +8,6 @@
 @interface ScreenPickerView : NSView
 
 @property (nonatomic, readwrite) CGImageRef imageRef;
+@property (nonatomic) NSColor* color;
 
 @end
