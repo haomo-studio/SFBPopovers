@@ -35,11 +35,14 @@
 // NSWindow subclass implementing a popover window
 // ========================================
 @interface ScoPopoverWindow : NSWindow {
-    ScreenPickerWindow *screenPickerWindow;
+    // ScreenPickerWindow *screenPickerWindow;
 }
 
 // ========================================
 // Popover window properties
+@property (nonatomic) NSString* _Nullable scoDocumentId;   // 为滴滴sco增加的变量，存储插件文档的id
+@property (nonatomic) ScreenPickerWindow* _Nullable screenPickerWindow;
+
 - (ScoPopoverPosition) popoverPosition;
 
 
@@ -75,7 +78,5 @@
 
 - (BOOL) isResizable;
 - (void) setResizable:(BOOL)resizable;
-
-
 
 @end

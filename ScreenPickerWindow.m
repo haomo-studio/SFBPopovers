@@ -90,6 +90,15 @@
     
     NSLog(@"sco-log: ScreenPickerWindow selected color:%@", color);
     
+    // @todo 这里将设置的color传回
+    @try {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ScoColorPicked" object:color];
+    } @catch (NSException *exception) {
+        NSLog(@"sco-log: ScreenPickerWindow postNotificationName ScoColorPicked exception");
+    } @finally {
+        NSLog(@"sco-log: ScreenPickerWindow postNotificationName ScoColorPicked finally");
+    }
+    
     NSPoint p = [NSEvent mouseLocation];
     NSRect f = [self frame];
     if (NSPointInRect(p, f)) {
@@ -101,8 +110,7 @@
             CGFloat centerX = bitmapImageRep.size.width / 2;
             CGFloat centerY = bitmapImageRep.size.height / 2;            
             NSColor *color = [bitmapImageRep colorAtX:centerX y:centerY];
-
-            NSLog(@"sco-log: ScreenPickerWindow selected color:%@", color);
+            
             [_delegate window:self clickedAtPoint:p withColor:color];
         }
     }

@@ -53,30 +53,36 @@
 		[self setOpaque:NO];
 		[self setHasShadow:YES];
         
-        // @TODO 设置为只能获取到
-        screenPickerWindow = [[ScreenPickerWindow alloc] initWithContentRect:NSMakeRect(0, 0, 180, 180) styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
-        screenPickerWindow.delegate = self.delegate;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidBecomeKey:) name:NSWindowDidBecomeKeyNotification object:screenPickerWindow];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:screenPickerWindow];
-        NSLog(@"sco-log: screenPickerWindow initialized");
+        [self createScreenPickerWindow];
 	}
 
 	return self;
 }
 
+// 创建取色窗口
+- (ScreenPickerWindow *)createScreenPickerWindow {
+    self.screenPickerWindow = [[ScreenPickerWindow alloc] initWithContentRect:NSMakeRect(0, 0, 180, 180) styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
+    self.screenPickerWindow.delegate = self.delegate;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidBecomeKey:) name:NSWindowDidBecomeKeyNotification object:self.screenPickerWindow];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:self.screenPickerWindow];
+    NSLog(@"sco-log: screenPickerWindow initialized");
+    
+    return self.screenPickerWindow;
+}
+
 - (void)windowDidBecomeKey:(NSNotification *)notification {
-    if ([notification object] == screenPickerWindow) {
+    if ([notification object] == self.screenPickerWindow) {
         NSLog(@"sco-log: windowDidBecomeKey");
-        [screenPickerWindow setAcceptsMouseMovedEvents:YES];
+        [self.screenPickerWindow setAcceptsMouseMovedEvents:YES];
         [NSCursor hide];
     }
 }
 
 - (void)windowDidResignKey:(NSNotification *)notification {
-    if ([notification object] == screenPickerWindow) {
+    if ([notification object] == self.screenPickerWindow) {
         NSLog(@"sco-log: windowDidResignKey");
-        [screenPickerWindow setAcceptsMouseMovedEvents:NO];
+        [self.screenPickerWindow setAcceptsMouseMovedEvents:NO];
         [NSCursor unhide];
     }
 }
