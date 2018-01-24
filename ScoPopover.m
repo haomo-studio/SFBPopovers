@@ -248,6 +248,7 @@
 	pointOnScreen.x -= attachmentPoint.x;
 	pointOnScreen.y -= attachmentPoint.y;
 
+    NSLog(@"sco-log: pointOnScreen.x=%f, pointOnScreen.y=%f", pointOnScreen.x, pointOnScreen.y);
 	[_popoverWindow setFrameOrigin:pointOnScreen];
 
 	if(self.animates)

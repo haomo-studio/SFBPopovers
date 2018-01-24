@@ -10,7 +10,6 @@
 - (NSString *)convertFloatToHex: (CGFloat) f {
     NSLog(@"%f", f);
     return [NSString stringWithFormat:@"%lX", (long) (floor(f*255.0))];
-    //    return @"FF";
 }
 
 - (NSString *)getRedStr:(NSColor *) color {
